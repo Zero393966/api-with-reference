@@ -25,12 +25,19 @@
         "environment": {
           "default": "api",
           "description": "Server environment",
-          "enum": ["api", "api-staging", "api-dev"]
+          "enum": [
+            "api",
+            "api-staging",
+            "api-dev"
+          ]
         },
         "port": {
           "default": "443",
           "description": "Server port number",
-          "enum": ["443", "8443"]
+          "enum": [
+            "443",
+            "8443"
+          ]
         },
         "basePath": {
           "default": "v1",
@@ -44,6 +51,115 @@
     }
   ],
   "paths": {
+    "/ref": {
+      "get": {
+        "summary": "Ref Endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "operationId": "operation-id",
+        "x-stoplight": {
+          "id": "k9fm0tnnaihyy"
+        },
+        "deprecated": true,
+        "x-internal": true,
+        "description": "说明",
+        "security": [
+          {},
+          {
+            "OAuth2": [
+              "read:users",
+              "write:users"
+            ],
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-endpoint-extension-1": {
+          "name": "endpoint2"
+        },
+        "x-endpoint-extension-2": 2,
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "h1",
+            "description": "h1-说明"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersionHeader"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 2,
+              "multipleOf": 3
+            },
+            "in": "header",
+            "name": "h3",
+            "description": "h2-说明",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "q1",
+            "description": "q1-说明"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 11,
+              "maximum": 22,
+              "multipleOf": 33
+            },
+            "in": "query",
+            "name": "q3",
+            "description": "q3-说明",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "cookie",
+            "name": "c1",
+            "description": "c1-说明"
+          },
+          {
+            "$ref": "#/components/parameters/sessionCookie"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 111,
+              "maximum": 222,
+              "multipleOf": 333
+            },
+            "in": "cookie",
+            "name": "c3",
+            "description": "c3-说明",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserInput"
+        }
+      }
+    },
     "/users": {
       "summary": "User management endpoints",
       "description": "Operations for managing user accounts and profiles",
@@ -67,7 +183,10 @@
         }
       ],
       "get": {
-        "tags": ["Users", "Admin"],
+        "tags": [
+          "Users",
+          "Admin"
+        ],
         "summary": "List all users",
         "description": "Retrieve a paginated list of all users in the system",
         "operationId": "listUsers",
@@ -105,7 +224,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["name:asc", "name:desc", "created:asc", "created:desc"]
+              "enum": [
+                "name:asc",
+                "name:desc",
+                "created:asc",
+                "created:desc"
+              ]
             },
             "style": "form",
             "explode": false
@@ -122,7 +246,11 @@
               "properties": {
                 "status": {
                   "type": "string",
-                  "enum": ["active", "inactive", "pending"]
+                  "enum": [
+                    "active",
+                    "inactive",
+                    "pending"
+                  ]
                 },
                 "role": {
                   "type": "string"
@@ -241,7 +369,10 @@
         },
         "security": [
           {
-            "OAuth2": ["read:users", "admin"]
+            "OAuth2": [
+              "read:users",
+              "admin"
+            ]
           },
           {
             "ApiKeyAuth": []
@@ -254,7 +385,9 @@
         "deprecated": false
       },
       "post": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Create a new user",
         "description": "Create a new user account with the provided information",
         "operationId": "createUser",
@@ -374,7 +507,9 @@
         },
         "security": [
           {
-            "OAuth2": ["write:users"]
+            "OAuth2": [
+              "write:users"
+            ]
           }
         ]
       }
@@ -396,7 +531,9 @@
         }
       ],
       "get": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Get user by ID",
         "description": "Retrieve detailed information about a specific user",
         "operationId": "getUserById",
@@ -433,12 +570,16 @@
         },
         "security": [
           {
-            "OAuth2": ["read:users"]
+            "OAuth2": [
+              "read:users"
+            ]
           }
         ]
       },
       "put": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Update user",
         "description": "Update an existing user's information",
         "operationId": "updateUser",
@@ -462,7 +603,9 @@
         }
       },
       "delete": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Delete user",
         "description": "Remove a user from the system",
         "operationId": "deleteUser",
@@ -490,12 +633,17 @@
         },
         "security": [
           {
-            "OAuth2": ["delete:users", "admin"]
+            "OAuth2": [
+              "delete:users",
+              "admin"
+            ]
           }
         ]
       },
       "patch": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Partially update user",
         "description": "Update specific fields of a user",
         "operationId": "patchUser",
@@ -532,7 +680,9 @@
         }
       },
       "head": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Check if user exists",
         "description": "Check if a user exists without retrieving the full data",
         "operationId": "headUser",
@@ -546,7 +696,9 @@
         }
       },
       "options": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Get supported operations",
         "description": "Returns the supported HTTP methods for this resource",
         "operationId": "optionsUser",
@@ -565,7 +717,9 @@
         }
       },
       "trace": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Trace user endpoint",
         "description": "Performs a message loop-back test along the path to the target resource",
         "operationId": "traceUser",
@@ -578,7 +732,9 @@
     },
     "/files/upload": {
       "post": {
-        "tags": ["Files"],
+        "tags": [
+          "Files"
+        ],
         "summary": "Upload files",
         "description": "Upload one or more files with metadata",
         "operationId": "uploadFiles",
@@ -616,7 +772,9 @@
                     }
                   }
                 },
-                "required": ["file"]
+                "required": [
+                  "file"
+                ]
               },
               "encoding": {
                 "file": {
@@ -665,7 +823,11 @@
       "User": {
         "type": "object",
         "description": "User account information",
-        "required": ["id", "name", "email"],
+        "required": [
+          "id",
+          "name",
+          "email"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -687,7 +849,12 @@
           "status": {
             "type": "string",
             "description": "Account status",
-            "enum": ["active", "inactive", "pending", "suspended"],
+            "enum": [
+              "active",
+              "inactive",
+              "pending",
+              "suspended"
+            ],
             "default": "pending"
           },
           "role": {
@@ -793,7 +960,9 @@
                 }
               }
             },
-            "required": ["adminLevel"]
+            "required": [
+              "adminLevel"
+            ]
           }
         ]
       },
@@ -807,7 +976,11 @@
             "properties": {
               "subscriptionTier": {
                 "type": "string",
-                "enum": ["free", "premium", "enterprise"]
+                "enum": [
+                  "free",
+                  "premium",
+                  "enterprise"
+                ]
               }
             }
           }
@@ -815,7 +988,11 @@
       },
       "UserInput": {
         "type": "object",
-        "required": ["name", "email", "password"],
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -851,7 +1028,11 @@
         "properties": {
           "theme": {
             "type": "string",
-            "enum": ["light", "dark", "auto"],
+            "enum": [
+              "light",
+              "dark",
+              "auto"
+            ],
             "default": "auto"
           },
           "language": {
@@ -891,7 +1072,11 @@
         "properties": {
           "eventType": {
             "type": "string",
-            "enum": ["created", "updated", "deleted"]
+            "enum": [
+              "created",
+              "updated",
+              "deleted"
+            ]
           },
           "userId": {
             "type": "integer",
@@ -908,7 +1093,10 @@
       },
       "Error": {
         "type": "object",
-        "required": ["code", "message"],
+        "required": [
+          "code",
+          "message"
+        ],
         "properties": {
           "code": {
             "type": "integer",
@@ -952,7 +1140,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "petType"]
+        "required": [
+          "name",
+          "petType"
+        ]
       },
       "Cat": {
         "allOf": [
@@ -964,7 +1155,12 @@
             "properties": {
               "huntingSkill": {
                 "type": "string",
-                "enum": ["clueless", "lazy", "adventurous", "aggressive"]
+                "enum": [
+                  "clueless",
+                  "lazy",
+                  "adventurous",
+                  "aggressive"
+                ]
               }
             }
           }
@@ -999,7 +1195,58 @@
             "example": {
               "code": 404,
               "message": "Resource not found"
+            },
+            "examples": {
+              "Not Found JSON Example 1": {
+                "value": {
+                  "code": 0,
+                  "message": "Not Found JSON Example 1",
+                  "details": [
+                    {
+                      "field": "string",
+                      "issue": "string"
+                    }
+                  ],
+                  "traceId": "string"
+                }
+              },
+              "Not Found JSON Example 2": {
+                "value": {
+                  "code": 0,
+                  "message": "Not Found JSON Example 2",
+                  "details": [
+                    {
+                      "field": "string",
+                      "issue": "string"
+                    }
+                  ],
+                  "traceId": "string"
+                }
+              },
+              "Not Found JSON Ref Example 1": {
+                "$ref": "#/components/examples/ErrorExample"
+              }
             }
+          }
+        },
+        "headers": {
+          "response-header-1": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "response-header-1-说明"
+          },
+          "header-1": {
+            "$ref": "#/components/headers/X-Rate-Limit"
+          },
+          "response-header-2": {
+            "schema": {
+              "type": "number",
+              "minimum": 1111,
+              "maximum": 2222,
+              "multipleOf": 3333
+            },
+            "description": "response-header-2-说明"
           }
         }
       },
@@ -1183,11 +1430,43 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UserInput"
+            },
+            "examples": {
+              "User Input JSON Example 1": {
+                "value": {
+                  "name": "string",
+                  "email": "user1@example.com",
+                  "age": 1,
+                  "callbackUrl": "http://example1.com"
+                }
+              },
+              "User Input JSON Example 2": {
+                "value": {
+                  "name": "string",
+                  "email": "user2@example.com",
+                  "age": 2,
+                  "callbackUrl": "http://example.com"
+                }
+              },
+              "User Input Ref Example 1": {
+                "$ref": "#/components/examples/UserExample"
+              }
             }
           },
           "application/xml": {
             "schema": {
               "$ref": "#/components/schemas/UserInput"
+            },
+            "examples": {
+              "User Input XML Example 1": {
+                "value": "\"User Input XML Example 1\""
+              },
+              "User Input XML Example 2": {
+                "value": "\"User Input XML Example 2\""
+              },
+              "\"User Input XML Ref Example 1\"": {
+                "$ref": "#/components/examples/UserExample"
+              }
             }
           }
         }
@@ -1318,7 +1597,9 @@
   },
   "security": [
     {
-      "OAuth2": ["read:users"]
+      "OAuth2": [
+        "read:users"
+      ]
     },
     {
       "ApiKeyAuth": []
@@ -1350,5 +1631,9 @@
   "externalDocs": {
     "description": "Complete API documentation",
     "url": "https://docs.example.com"
-  }
+  },
+  "x-overview-extension-1": {
+    "name": "overview1"
+  },
+  "x-overview-extension-2": 2
 }
